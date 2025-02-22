@@ -1,0 +1,62 @@
+
+                                                Last Updated : 
+                                                    19 Mar, 2024
+                                                
+
+                                                 
+                                                 
+                                            
+                                                                The file system module allows you to work with the file system on your computer NodeJS includes the fs module, to communicate with file systems. It provides functionality for interacting with the file system, such as reading from and writing to files, creating and removing directories, etc. The File System module in NodeJS is one of the most important and helpful modules. 
+
+Table of Content
+
+What is NPM FS?Understanding NodeJSCommon use for the File System moduleSome Advantages of Using NPM FS Asynchronous vs. Synchronous fs MethodsDifference between Synchronous methods and Asynchronous methodsInstalling NPM FS on NodeJSInstalling Dependencies for NPM FSTesting the Installation of NPM FSErrors During InstallationWhat is NPM FS?There is no specific package named "npm fs.". The  FS module includes all the functions necessary to read, write, and delete files on the local computer. The most effective and helpful methods for handling the file system include fs.writeFile(), fs.readFile(), and fs.write(). 
+
+To include the File System module, use the require() method:
+
+const fs = require('fs');Understanding NodeJS:NodeJS, with its JavaScript runtime environment, empowers users to execute JavaScript code beyond the confines of a web browser. Integral to its functionality is the File System module, which interfaces with the computer's file system, providing vital capabilities. Moreover, NodeJS leverages an event-driven, non-blocking I/O architecture, enabling it to seamlessly manage multiple requests concurrently, all the while avoiding disruptions to other tasks
+
+Common use for the File System module:Read filesCreate filesUpdate filesDelete filesRename filesSome Advantages of Using NPM FS Every NodeJS project has access to the built-in fs module without requiring installation.Offers a method for working with both binary and text files.Provides a way to keep track of changes to a file or directory.Data streams can be created, read, and written to and from files.Allows access to file paths and directories with the fs module enabling communication with the computer’s file system.Asynchronous vs. Synchronous fs Methods:Synchronous methods:Synchronous functions block the execution of the program until the file operation is performed. These functions are also called blocking functions. The synchronous methods have File Descriptor as the last argument. File Descriptor is a reference to opened files. It is a number or a reference id to the file returned after opening the file using fs.open() method of the fs module. All asynchronous methods can perform synchronously just by appending “Sync” to the function name. Some of the synchronous methods of fs module in NodeJS are:
+
+fs.readFileSync()fs.writeFileSync()fs.fsyncSync()fs.appendFileSync()fs.statSync()Asynchronous methods:Asynchronous functions do not block the execution of the program and each command is executed after the previous command even if the previous command has not computed the result. The previous command runs in the background and loads the result once it has finished processing. Thus, these functions are called non-blocking functions. They take a callback function as the last parameter. Asynchronous functions are generally preferred over synchronous functions as they do not block the execution of the program whereas synchronous functions block the execution of the program until it has finished processing. Some of the asynchronous methods of fs module in NodeJS are:
+
+fs.readFile()fs.rename()fs.write()fs.writeFile()fs.fsync()Difference between Synchronous methods and Asynchronous methods:Synchronous methods
+
+Asynchronous methods
+
+Synchronous functions are called blocking functions
+
+Asynchronous functions are called non-blocking functions.
+
+These functions take File Descriptor as the last argument.
+
+These functions take a callback function as the last argument.
+
+It blocks the execution of the program until the file operation has finished processing.
+
+It does not block the execution of the program.
+
+Examples: fs.readFileSync(), fs.appendFileSync(), fs.writeFileSync() etc.
+
+Examples: fs.readFile(), fs.appendFile(), fs.writeFile(), fs.stat() etc.  
+
+Installing NPM FS on NodeJS:You need not install the fs module separately, as it is included with the Node.js installation. To utilize the fs module in your code, simply import it using the require function.
+
+Installing Dependencies for NPM FS:Running npm init in the project directory allows you to create a package.json file to manage dependencies. With package.json in place, you can easily add additional dependencies using npm install followed by the desired package name. For instance, to install the express package, execute npm install express.
+
+npm install expressTesting the Installation of NPM FS:For verifying the functionality of the fs module installation, you can create a simple Node.js script that utilizes the fs module to read a file. Below is an example:
+
+const fs = require('fs');fs.readFile('gfg.txt', 'utf8', function(err, data) {  if (err) throw err;  console.log(data);});Errors During Installation:Some common errors that can pop up:
+
+npm ERR! code EPERMnpm WARN package.json mediawiki@0.0.0 No repositorynpm ERR! command failednpm install error – No compatible version found: fs@0.0.2Uncaught, unspecified error event ” from fs-write-stream-atomicTo address these issues, users should verify their operating system's routing tables or firewall settings, ensure that the package.json file includes a repository field, attempt the command execution once more, or opt to install an alternative version of the fs module.
+
+
+                            
+                            
+                                                                                                    Become a Full-Stack Developer and also get 90% fee refund on completing 90% course in 90 days! Take the Three 90 Challenge today.
+After successfully processing refunds worth over INR 5 Cr, GeeksforGeeks is back with the Three 90 challenge and this is your chance to upskill and get 90% refund. What more motivation do you need? Start the challenge right away!                                                                        
+                                                                              
+                                                                
+                        
+
+                                                
