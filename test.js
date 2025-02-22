@@ -26,6 +26,8 @@ import puppeteer from "puppeteer";
 import { JSDOM } from "jsdom";
 import { Readability } from "@mozilla/readability";
 import fs from 'fs';
+import OpenAI from "openai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 async function autoScroll(page) {
     const initialHeight = await page.evaluate(() => document.body.scrollHeight);
@@ -36,6 +38,15 @@ async function autoScroll(page) {
         newHeight = await page.evaluate(() => document.body.scrollHeight);
         if (newHeight === initialHeight) break;
         initialHeight = newHeight;
+    }
+}
+
+async function clickPagination(page) {
+    const nextButton = await page.$("a.page"); // Adjust selector
+    if (nextButton) {
+        await nextButton.click();
+        await page.waitForTimeout(2000); // Wait for load
+        await clickPagination(page); // Recurse
     }
 }
 
@@ -64,8 +75,56 @@ async function renderPage(url) {
     console.log("starting autoscroll");
     await autoScroll(page);
     console.log("autoscroll completed");
+    console.log('pagination');
+    await clickPagination(page);
+    console.log('end pagination')
 
     return { page, browser };
+}
+
+// async function summarizeWithLLM(content) {
+//     const openai = new OpenAI({
+//         apiKey: "",
+//     });
+
+//     console.log('Sending request to summarize');
+//     let reponse;
+//     try {
+//         reponse = await openai.chat.completions.create({
+//             model: "text-embedding-3-large",
+//             store: true,
+//             messages: [
+//                 { "role": "user", "content": `Summarize the following content in 5 point: ${content}` },
+//             ],
+//         });
+
+//         console.log('Request sent successfully');
+
+//     } catch (error) {
+//         console.error(error)
+//         throw new Error('Error sending request to OPENAI');
+//     }
+
+//     return reponse.choices[0].message.content;
+// }
+
+async function summarizeWithLLM(content) {
+    console.log('Sending request to summarize');
+    let response;
+    try {
+        const genAI = new GoogleGenerativeAI("api_key");
+        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite-preview" });
+
+        const prompt = `Summarize the following content in 5-10 points optimally, effcientyly and keeping context intact: ${content}`;
+
+        response = await model.generateContent(prompt);
+
+    } catch (error) {
+        console.error(error)
+        throw new Error('Error sending request to OPENAI');
+    }
+
+    return response.response.text();
 }
 
 async function extractMainContent(page) {
@@ -115,8 +174,19 @@ async function writeDataToFile(content) {
     console.log("File written")
 }
 
-const url = 'https://www.geeksforgeeks.org/how-to-install-npm-fs-in-node-js/';
+async function writeSummaryDataToFile(content) {
+    fs.writeFileSync('./dataSummaryGemini.txt', content);
+    console.log("File written")
+}
+
+const url = 'http://quotes.toscrape.com/';
 const textContent = await scrapeText(url);
 await writeDataToFile(textContent);
+const summaryData = await summarizeWithLLM(textContent);
+if (!summaryData) {
+    console.error('Error with data received');
+    process.exit(1);
+}
+await writeSummaryDataToFile(summaryData);
 
 console.log('DONE');
