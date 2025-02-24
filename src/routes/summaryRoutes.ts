@@ -1,7 +1,9 @@
 import express from "express";
+import { textSummary } from "../controller/summaryController";
 
 const summaryRouter = express.Router();
 
-summaryRouter.route('/').post();
+// POST: /api/summary/
+summaryRouter.route('/').post(textSummary);
 
 export { summaryRouter };

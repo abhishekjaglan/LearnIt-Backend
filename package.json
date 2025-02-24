@@ -24,6 +24,8 @@
     "url": "^0.11.4"
   },
   "devDependencies": {
-    "@types/express": "^5.0.0"
+    "@types/express": "^5.0.0",
+    "@types/jsdom": "^21.1.7",
+    "@types/puppeteer": "^5.4.7"
   }
 }
