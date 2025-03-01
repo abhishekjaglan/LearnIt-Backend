@@ -2,4 +2,4 @@ node_modules
 next.txt
 dist
 test.js
-/src/config/.env
+.env

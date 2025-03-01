@@ -61,6 +61,7 @@ export async function renderPage(url:string)  {
 export async function summarizeWithLLM(content:string):Promise<string> {
     console.log('Sending request to summarize');
     let response;
+    console.log("API KEY: ", config.GEMINI_API_KEY)
     try {
         const genAI = new GoogleGenerativeAI(`${config.GEMINI_API_KEY}`);
         const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite-preview" });

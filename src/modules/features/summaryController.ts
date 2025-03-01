@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { scrapeText, summarizeWithLLM } from "../../shared/lib/libFunctions";
+import { scrapeText, summarizeWithLLM } from "../../shared/utils/libFunctions";
 
 export class SummarizationError extends Error {
     constructor(message: string) {
