@@ -1,8 +1,8 @@
 import express, { NextFunction, Request, Response } from "express";
 import "dotenv/config"
-import { routeHandler } from "./routes/routeHandler";
-import { SummarizationError } from "./controller/summaryController";
+import { routeHandler } from "./routeHandler";
 import config from "./config/config";
+import { SummarizationError } from "./modules/features/summaryController";
 
 const app = express();
 const PORT = config.PORT;

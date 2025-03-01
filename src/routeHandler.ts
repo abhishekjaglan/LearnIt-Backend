@@ -1,6 +1,6 @@
 import express from "express";
-import { userRouter } from "./userRoutes";
-import { summaryRouter } from "./summaryRoutes";
+import { userRouter } from "./modules/users/userRoutes";
+import { summaryRouter } from "./modules/features/summaryRoutes";
 
 // const router = express.Router();
 const routeHandler = express();

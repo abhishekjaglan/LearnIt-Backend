@@ -1,5 +1,5 @@
 import express from "express";
-import { textSummary } from "../controller/summaryController";
+import { textSummary } from "./summaryController";
 
 const summaryRouter = express.Router();
 

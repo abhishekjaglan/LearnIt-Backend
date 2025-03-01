@@ -3,7 +3,7 @@ import { JSDOM } from "jsdom";
 import { Readability } from "@mozilla/readability";
 import fs from 'fs';
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import config from "../config/config";
+import config from "../../config/config";
 
 export async function autoScroll(page:Page) {
     let initialHeight = await page.evaluate(() => document.body.scrollHeight);
